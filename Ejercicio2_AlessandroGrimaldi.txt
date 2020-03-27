@@ -1,24 +1,24 @@
-(define (contar-pares lst)
+(define (contar-pares lista)
   (fold-right
-    (lambda (next x)(cons(list next (contador next lst))
+    (lambda (next x)(cons(list next (contador next lista))
         x))
     '()
-    (borrar-duplicados lst)))
-(define (borrar-duplicados lst)
-  (define (contains? y lst_temp)
-    (not (zero? (contador y lst_temp))))
+    (borrar-duplicados lista)))
+(define (borrar-duplicados lista)
+  (define (contains? y list_temporal)
+    (not (zero? (contador y list_temporal))))
   (fold-right
     (lambda (next x)
       (if (contains? next x)
           x
           (cons next x)))
     '()
-    lst))
-(define (contador x lst)
+    lista))
+(define (contador x lista)
   (fold-right
     (lambda(next contador)(if (= next x) (+ contador 1) contador))
         0
-        lst))
+        lista))
 
-(define lst '(2 3 1 3 2 2 2 3 4 6 6 6 7 1))
-(contar-pares lst)
+(define lista '(2 3 1 3 2 2 2 3 4 6 6 6 7 1))
+(contar-pares lista)
