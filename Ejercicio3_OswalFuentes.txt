@@ -1,0 +1,18 @@
+(define l (cons 1 (cons 2 (cons 3 (cons 4 '())))))
+
+(define join (lambda (a b)
+(if (and (null? a) (null? b))
+'()
+(if (not (null? a))
+(cons (car a) (join (cdr a) b))
+(if (not (null? b))
+(cons (car b) (join a (cdr b)))'())))))
+
+(define aplanar (lambda (l)
+(if (null? l)
+'()
+(if (list? (car l))
+(join (aplanar (car l)) (aplanar (cdr l)))
+(join (list (car l)) (aplanar (cdr l)))))))
+
+(aplanar '(1,2,r,t,(4,5,t)(7,8,(a,(b,(c,d))))(9))
